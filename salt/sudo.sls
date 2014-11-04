@@ -1,0 +1,4 @@
+sudo:
+  pkg:
+    - installed
+
