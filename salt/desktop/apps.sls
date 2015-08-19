@@ -76,7 +76,11 @@ cups:
   service:
     - running
     - enable: true
+{% if grains['os'] == 'Arch' %}
     - name: 'org.cups.cupsd'
+{% elif grains['os'] == 'Ubuntu' %}
+    - name: 'cups'
+{% endif %}
 {% for p in [
   'cups-pdf',
   'ghostscript', 'gsfonts',
@@ -115,6 +119,6 @@ printer-driver-gutenprint:
 {% endfor %}
 
 {% if grains['os'] == 'Ubuntu' %}
-build-enssential:
+build-essential:
   pkg.installed
 {% endif %}
