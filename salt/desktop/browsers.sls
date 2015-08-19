@@ -1,6 +1,6 @@
 chromium:
   pkg.installed:
-    {% if grains['os'] == 'Ubuntu' %}
+    {% if grains['os'] == 'Debian' %}
     - name: chromium-browser
     {% elif grains['os'] == 'Arch' %}
     - name: chromium

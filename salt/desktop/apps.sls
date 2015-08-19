@@ -1,5 +1,5 @@
 
-{% if grains['os'] == 'Ubuntu' %}
+{% if grains['os'] == 'Debian' %}
 aptitude:
   pkg.installed
 {% endif %}
@@ -12,7 +12,7 @@ ditaa:
   
 texlive:
   pkg.installed:
-    {% if grains['os'] == 'Ubuntu' %}
+    {% if grains['os'] == 'Debian' %}
     - name: texlive
     {% elif grains['os'] == 'Arch' %}
     - name: texlive-most
@@ -29,7 +29,7 @@ openvpn:
 openssh:
   pkg:
     - installed
-{% elif grains['os'] == 'Ubuntu' %}
+{% elif grains['os'] == 'Debian' %}
 openssh-client:
   pkg.installed
 openssh-server:
@@ -93,7 +93,7 @@ foomatic-db-nonfree:
   pkg.installed
 gutenprint:
   pkg.installed
-{% elif grains['os'] == 'Ubuntu' %}
+{% elif grains['os'] == 'Debian' %}
 printer-driver-gutenprint:
   pkg.installed
 {% endif %}
@@ -114,7 +114,7 @@ printer-driver-gutenprint:
     - installed
 {% endfor %}
 
-{% if grains['os'] == 'Ubuntu' %}
+{% if grains['os'] == 'Debian' %}
 build-enssential:
   pkg.installed
 {% endif %}
