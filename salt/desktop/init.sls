@@ -54,6 +54,7 @@ gnupg:
   'pianobar',
   'evince',
   'dnsutils',
+  'samba',
   ] %}
 {{ p }}:
   pkg:

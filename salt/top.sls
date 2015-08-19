@@ -3,6 +3,8 @@ base:
     - desktop
   'rbsmith-desktop':
     - desktop
+  'localhost':
+    - desktop
 
 
 

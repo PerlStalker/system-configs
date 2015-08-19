@@ -1,0 +1,37 @@
+* Layout
+- /
+  - init
+    - install minion =wget -O - https://bootstrap.saltstack.com | sudo sh=
+    - if local
+      - installs git (salt-call --local pkg.install git)
+      - git pull system-configs (where?)
+      - copy or link /srv/salt to salt root in system-configs tree
+      - =salt-call --local state.highstate=
+    - else
+      - manual: authorized salt key
+      - =salt-call state.highstate=
+  - Dockerfile
+  - /salt - local salt tree (/src/salt)
+
+* Crazy ideas
+** Docker as desktop
+The idea is to provide run the desktop in a Docker and connect to it
+using one of the standard terminal services-style systems directly
+from the host system.
+
+- X available via XDMCP and? x2go server
+- Host system X login starts exclusively as XDMCP client
+- docker
+  - docker in docker
+  - OR DOCKER_HOST points at host
+- home directory mapped from host system
+- will need something (shell?) running to keep docker happy
+- need a script to create user
+
+- Why?
+  - quick rebuilds of desktop for testing upgrades and other craziness
+  - could provide base for cloud-hosted desktop, if needed
+  - keeping home external means that profiles (chrome, firefox) and
+    configs don't need to be recreated
+  - easily switch distros for desktop
+  - Because I can?
