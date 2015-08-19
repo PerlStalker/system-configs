@@ -8,7 +8,5 @@ base:
     - docker
     - kvm
   'localhost':
-    - desktop
-
-
-
+    - desktop.apps
+    - desktop.browsers
