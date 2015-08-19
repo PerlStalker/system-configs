@@ -9,3 +9,6 @@ chromium:
 firefox:
   pkg:
     - installed
+
+w3m:
+  pkg.installed

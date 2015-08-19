@@ -121,4 +121,8 @@ printer-driver-gutenprint:
 {% if grains['os'] == 'Ubuntu' %}
 build-essential:
   pkg.installed
+autoconf:
+  pkg.installed
+texinfo:
+  pkg.installed
 {% endif %}
