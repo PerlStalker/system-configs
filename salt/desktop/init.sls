@@ -5,50 +5,65 @@ include:
   - desktop.browsers
   - sudo
 
+{% if grains['os'] == 'Ubuntu' %}
+aptitude:
+  pkg.installed
+{% endif %}
+
 # emacs
 emacs:
-  pkg:
-    - installed
+  pkg.installed
 ditaa:
   pkg.installed
-texlive-most:
-  pkg.installed
-    
-chrony:
-  pkg:
-    - installed
-  service:
-    - running
-    - enable: true
+  
+texlive:
+  pkg.installed:
+    {% if grains['os'] == 'Ubuntu' %}
+    - name: texlive
+    {% elif grains['os'] == 'Arch' %}
+    - name: texlive-most
+    {% endif %}
+# ntpd
 
 zsh:
-  pkg:
-    - installed
+  pkg.installed
 tmux:
-  pkg:
-    - installed
+  pkg.installed
 openvpn:
-  pkg:
-    - installed
+  pkg.installed
+
+{% if grains['os'] == 'Arch' %}
 openssh:
   pkg:
     - installed
-
+{% elif grains['os'] == 'Ubuntu' %}
+openssh-client:
+  pkg.installed
+openssh-server:
+  pkg.installed
+{% endif %}
+  
 gnupg:
   pkg.installed
     
-{% for p in ['ffmpeg', 'kdenlive', 'vlc', 'audacity', 'xmms2'] %}
+{% if grains['os'] == 'Arch' %}
+  {% for p in ['ffmpeg', 'kdenlive', 'vlc', 'audacity', 'xmms2'] %}
 {{ p }}:
   pkg:
     - installed
-{% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% if grains['os'] == 'Arch' %}
+glibc:
+  pkg.installed
+{% endif %}
 
 # misc
 {% for p in [
   'wget',
   'rsync',
   'sysstat',
-  'glibc',
   'ispell',
   'aspell-en',
   'pianobar',
@@ -72,8 +87,7 @@ cups:
 {% for p in [
   'cups-pdf',
   'ghostscript', 'gsfonts',
-  'foomatic-db', 'foomatic-db-engine', 'foomatic-db-nonfree',
-  'gutenprint',
+  'foomatic-db', 'foomatic-db-engine',
   'a2ps'
   ] %}
 {{ p }}:
@@ -81,13 +95,24 @@ cups:
     - installed
 {% endfor %}
 
+{% if grains['os'] == 'Arch' %}
+foomatic-db-nonfree:
+  pkg.installed
+gutenprint:
+  pkg.installed
+{% elif grains['os'] == 'Ubuntu' %}
+printer-driver-gutenprint:
+  pkg.installed
+{% endif %}
 
 # wireless
+{% if grains['os'] == 'Arch' %}
 {% for p in ['dialog', 'iw', 'wpa_supplicant', 'wpa_actiond'] %}
 {{ p }}:
   pkg:
     - installed
 {% endfor %}
+{% endif %}
 
 # version control
 {% for p in ['cvs', 'subversion', 'mercurial', 'bzr', 'git'] %}
@@ -96,18 +121,7 @@ cups:
     - installed
 {% endfor %}
 
-
-## dev/virtualization
-docker:
-  pkg:
-    - installed
-  service:
-    - running
-    - enable: true
-libvirt:
-  pkg:
-    - installed
-# qemu-kvm?
-qemu:
-  pkg:
-    - installed
+{% if grains['os'] == 'Ubuntu' %}
+build-enssential:
+  pkg.installed
+{% endif %}
