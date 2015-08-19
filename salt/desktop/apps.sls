@@ -18,14 +18,6 @@ texlive:
     - name: texlive-most
     {% endif %}
 
-ntp:
-  pkg:
-    - installed
-  service:
-    - running
-    - enable: true
-    - name: 'ntpd'
-
 zsh:
   pkg.installed
 tmux:
