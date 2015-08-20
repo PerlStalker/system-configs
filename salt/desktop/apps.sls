@@ -25,6 +25,18 @@ tmux:
 openvpn:
   pkg.installed
 
+## remmina
+remmina:
+  pkg.installed
+
+freerdp:
+  pkg.installed:
+    {% if grains['os'] == 'Debian' %}
+    - name: freerdp-x11
+    {% elif grains['os'] == 'Arch' %}
+    - name: freerdp
+    {% endif %}
+
 {% if grains['os'] == 'Arch' %}
 openssh:
   pkg:
