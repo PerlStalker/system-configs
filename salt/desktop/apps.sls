@@ -125,4 +125,6 @@ autoconf:
   pkg.installed
 texinfo:
   pkg.installed
+install-info:
+  pkg.installed
 {% endif %}

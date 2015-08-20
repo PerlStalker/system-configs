@@ -76,18 +76,6 @@ x2goserver:
   service:
     - running
     - enable: true
-
-# fonts
-{% for p in [
-  'terminus-font',
-  'ttf-droid',
-  'ttf-dejavu',
-  'ttf-indic-otf',
-  ] %}
-{{ p }}:
-  pkg:
-    - installed
-{% endfor %}
   
 ## other apps
 {% for p in [

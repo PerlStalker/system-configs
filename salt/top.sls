@@ -12,3 +12,4 @@ base:
   'localhost':
     - desktop.apps
     - desktop.browsers
+    - desktop.fonts
